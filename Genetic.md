@@ -471,3 +471,137 @@ timeline
 - 如果我有一個probe可以跟tandem repeat的核心序列結合，並且我用限制酶切下含有tandem repeat的片段，如果條帶位置越接進負極，重複的序列越多，越可能發病
 
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/southern_blotting_tandem_repeat_0306.png)
+
+##### FISH
+- in situ (原位) = 直接在樣本上進行檢測
+- 把有螢光的probe直接跟樣本的遺傳物質做鹼基配對
+- 可以用來觀察細胞分裂的不同時期的細胞染色體樣態，或是用視覺化的方式確定基因在染色體的位置
+- 也可以用來觀測基因組的結構變異 (缺失、重複、插入、倒位、易位等等)
+
+> [!Note] 舉個栗子 🌰
+> - 我可以把一個基因的probe放到已經複製凝聚的染色體上面。要是一對色體 發出螢光的位置不同，那就是發生了translocation
+> - 要是一個染色體只出現一個螢光點 (按理來說複製了就該有兩個螢光點)，就說明發生了deletion
+
+![image alt](https://www.genome.gov/sites/default/files/inline-images/FISH_Fact-sheet2020.jpg)
+
+#### SNP chips and hybridization
+- 假如說我有一個SNP，它有AT跟CG兩種形式，這個時候，我的SNP組合，由於染色體是雙套，就會是: $g^{AT}g^{AT}$ 、 $g^{AT}g^{CG}$ 、 $g^{CG}g^{CG}$
+- 然後我針對DNA變性後的每一個單股片段都接上螢光標記
+- 假如說我有不同的SNP probe，這些probe附著到beads (微珠) 上，當我的螢光DNA樣本倒入，跟這些beads上的probes雜交，我就會得到下列結果:
+
+|基因型|對應A的探針|對應T的探針|對應C的探針|對應G的探針|
+|-----|---------|---------|----------|---------|
+| $g^{AT}g^{AT}$ |🟡|🟡|⚪|⚪|
+| $g^{AT}g^{CG}$ |🟡|🟡|🟡|🟡|
+| $g^{CG}g^{CG}$ |⚪|⚪|🟡|🟡|
+
+#### 毛細管電泳偵測
+毛細管電泳偵測
+- 讓PCR產物帶有螢光標記，放進細長的毛細管中，利用電場讓DNA片段依大小移動。跟凝膠電泳一樣，小片段跑得快，大片段跑得慢
+- 儀器用雷射激發螢光，偵測片段通過的時間
+- 結果呈現：電腦會畫出峰圖 (electropherogram)，每個峰代表一個片段的大小。具體來說，就是一個橫軸為片段大小，縱軸為螢光強度的圖
+- 假如說，某STR位點出現兩個峰，表示此人有兩個不同長度的等位基因 (heterozygous)。如果只有一個波峰，那就是 homozygous
+---
+
+## chapter 2, 3
+### classical genetics
+- 古典遺傳學OG孟德爾開創
+- 發明hereditary factors (遺傳因子) 這詞，就是現在知道的gene
+- OG酷愛豌豆的原因:
+  - 性狀明顯看得出來
+  - 好栽培，三個月就收成 (我的意思是生長週期短好做實驗)
+  - 自花授粉植物，品系穩定
+  - 遺傳控制可以用異花人工授粉達成
+
+##### 速帶過國中課本
+- 在dominant跟recessive的同型合子 ( $WW\times ww$ ，此處代表圓形種子vs皺縮種子) 下，F1代指看出dominant表徵，F2中recessive表徵再次出現，比例大概是3:1
+- 在異型合子裡面，只有dominant的遺傳因子顯現 → **顯隱律**
+- test cross: 我不知道其中一個個體的基因型，所以我讓它跟另一個隱性的同型合子做雜交，如果後代沒有隱性，原個體基因型為 $WW$ ，如果顯性隱性都有，那原個體基因型為 $Ww$
+
+> 好，進入正題，各位重新變成大學生 🙂
+
+#### 種子到底為什麼皺縮
+- 種子的形狀由SBEI (澱粉分支酶) 基因控制，該基因用來合成澱粉
+- SBEI的基因突變 (轉作子插入基因導致功能下降)，導致澱粉合成異常
+- 正常種子能把糖轉成澱粉，保持飽滿圓滑。突變型因為SBEI功能缺失，澱粉量減少、糖分累積，乾燥時水分流失不均，種子皺縮。
+
+> [!Note]
+> 在幫豌豆做PCR跑電泳時，可以看出 $WW$ 的基因，因為沒有insertion，形成一條跑得比較遠的條帶。 $Ww$ 形成一遠一近的條帶。 $ww$ 形成一條近的條帶
+
+#### 單基因遺傳主要特徵
+- 基因成對出現 (兩個alleles)，可以兩兩相同 (homozygous)，或是兩兩不同 (heterozygous)
+- 一個配子形成時通常只攜帶一個allele，授精隨機發生，不同親代的allele重新配對
+- 這叫做**the principle of segregation**
+
+#### dihybrid expetiment
+- 可以用Punnett square (棋盤法) 來判斷基因型跟預測表現型，如果是dihybrid cross (兩性狀雜交，例如 $WW\ GG\times ww\ gg$ )，表現型在F2的比例將會是 **9:3:3:1**
+- 也就是說，在兩個性狀的遺傳因子下，會形成4種基因型配子 ( $WG,\ Wg,\ wG,\ wg$ )
+- 一個trait不會影響到另一個trait，這叫做**the principle of independent assortment**
+
+#### 家族譜系 
+- 可以用Pedigree diagram來分析，通常圖中會用不同的符號代表不同狀況 (一次讓你終生難忘 🙂)
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/pedigree_diagram_symbols_0307.png)
+
+##### autosomal dominant inheritance
+- 例如Huntington's disease
+- 體染色體顯性基因遺傳，男性跟女性受到的影響相同，由於是顯性，受影響個體在每一代都會有出現的可能
+- 受影響的個體通常有一位受影響的父母
+- 在圖上面基本上不會出現半滿的圖形 (因為發病基因並非隱性)，而且每一世代基本上都會有人中標
+
+##### autosomal recessive inheritance
+- 例如albinism (白化症)
+- 異型合子個體 (半滿圖形) 不會發病 (被稱為carriers)，如果有發病的個體，其父母至少兩個皆為異型合子，或是其中一個是發病者，另一個是異型合子
+- 體染色體隱性基因遺傳，男性跟女性受到的影響相同
+- inbreeding (近親交配) 會大幅提升遺傳的可能性
+
+### 遺傳定律的延伸跟拓展
+#### codominance
+- alleles所產生的性狀會同時且獨立的表現出來，而不是一個被遮蓋或是產生中間型態
+- 可以從表現型上明確分析出到底是homozygous還是heterozygous
+
+##### 舉例
+- SSRs/STRs/microsatellite的短串聯重複序列 (異型合子的基因電泳檢測結果就是兩條size的STRs條帶，來自父親跟母親)
+- ABO血型系統 (A型抗原或是B型抗原)
+- sickle cell disease的紅血球特徵 (異型合子可以同時產生 $Hb^A$ 跟 $Hb^S$ )
+- Roan color: 紅色的毛牛跟白色的毛牛會產生花斑毛牛 (Roan)
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/SSRP_codominance_0307.png)
+
+#### incomplete dominance
+- 子代性狀表現的是中間型態，又稱為中間型遺傳，在表現型裡面，F2這一代就會形成1:2:1的比例
+- 例如金魚草的顏色，紅花 ( $RR$ )跟白花 ( $Rr$ )的子代為粉紅花 ( $Rr$ )
+
+#### multiple alleles
+- 單一性狀有三個以上alleles，但是基因型只由其中兩種alleles決定
+- 最熟悉的例子就是剛才共顯性提到的ABO血型系統 (基因分為 $I^A\ ,I^B\ ,i$ )
+- 複習一下血型跟抗體抗原的關係
+
+|blood types|A|B|AB|O|
+|-----------|-|-|--|-|
+|血漿中存在的相對應抗體|B antibody|A antibody|(none)|A and B antibodies|
+|紅血球表面存在的抗原|A antigen|B antigen|A and B antigens|(none)|
+|基因型|$I^A I^A$ or $I^A i$|$I^B I^B$ or $I^B i$|$I^A I^B$|$ii$|
+
+#### epitasis 
+- 有好幾個非等位基因 (loci不一樣) 同時控制一個性狀時，其中一對基因的表現會掩蓋或是改變另一對基因的表現
+  - epitatic: 掩蓋別的基因的那對基因
+  - hypotatic: 被掩蓋的那對基因
+
+##### epitasis vs dominance
+
+|特徵|dominance|epitasis|
+|---|---------|--------|
+|loci|發生在同一個基因座上的alleles之間，例如 $A$ 跟 $a$|發生在不同基因座上的非等位基因之間，例如 $A/a$ 跟 $B/b$|
+|影響|顯性掩蓋隱性|一個基因的表現決定另一個基因是否有出場的機會|
+
+##### 舉例
+- "髮色" 的基因 (例如長金髮或是棕髮)，當遇上了 "是否禿頭" 的基因，禿頭的基因會掩蓋掉髮色的基因
+- 拉不拉多有三種毛色: 黑色、棕色、黃色，是由一對控制色素產生的基因 ( $B/b$ ) ，跟一對控制色素是否沉著於毛髮的基因 ( $E/e$ ) 共同決定。如果後者的基因型為 $ee$ ，無論前者基因為何，都會呈現黃色的毛髮
+
+|gamate|$BE$|$bE$|$Be$|$be$|
+|------|----|----|----|----|
+|$BE$|$BB\ EE$ ⚫|$Bb\ EE$ ⚫|$BB\ Ee$ ⚫|$Bb\ Ee$ ⚫|
+|$bE$|$Bb\ EE$ ⚫|$bb\ EE$ 🟤|$Bb\ Ee$ ⚫|$bb\ Ee$ 🟤|
+|$Be$|$BB\ Ee$ ⚫|$Bb\ Ee$ ⚫|$BB\ ee$ 🟡|$Bb\ ee$ 🟡|
+|$be$|$Bb\ Ee$ ⚫|$bb\ Ee$ 🟤|$Bb\ ee$ 🟡|$bb\ ee$ 🟡|
