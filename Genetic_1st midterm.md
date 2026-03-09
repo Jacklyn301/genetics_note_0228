@@ -1,5 +1,5 @@
 ---
-title: Genetic_1142
+title: Genetic_1142_1st_midterm
 
 ---
 
@@ -880,3 +880,47 @@ classDef Me fill: #ffa34f, stroke: #c43838, stroke-width: 3px
 
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/Hemophilia_A_0309.png)
 
+
+#### X-linked dominant disorders
+- 要是男性為發病者，其女兒都會發病 (100%)，但不會傳給兒子 (0%)
+- 要是女性為發病者 (heterozygous)，會友一半的基率傳給後代 (性別不影響)
+- 例如X-linked hypophosphatemic rickets (*PHEX*基因突變)，或是Rett Syndrome (*MECP2*基因突變)
+
+#### Y-linked inheritance
+- 僅影響男性 (這不廢話嗎)
+- 如果個體有發病，他爸爸通常也有病，有病的個體產生的男性後代基本都會發病 (這不廢話嗎 🤣)
+- 例如先天性遺傳多毛症 (hypertrichosis)
+
+#### Nondisjunction of X Chromosomes
+- 最經典的例子就是Turner syndrome，45, X0，症狀包含蹼狀的頸部、低耳位、頸後髮際線較低、甲狀腺功能低下、不孕、糖尿病、骨質疏鬆等
+- 還有一個例子是Klinefelter's syndrome，47, XXY，症狀包含肌肉虛弱、身高較高、外生殖器異常、缺乏性慾，嚴重的可能會有男性女乳症等症狀
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/karyotype_47XXY_0309.png)
+
+#### mitochondrial inheritance
+- 通常男性跟女性子代都會影響，基本上是屬於母性遺傳 (materal inheritance)，並且只有女性子代會把該遺傳帶給自己的下一代 (...這好像也是廢話? 🙂)
+- 如果是屬於新生突變 (*de novo* mutation)，就另當別論
+- 有獨立的基因組: 粒線體有自己的環狀DNA (mtDNA)，和細胞核的DNA是分開的
+- 由於細胞的代謝不一，粒線體的密度在不同組織之間也不太一樣
+> [!Note]
+> 通常高代謝的器官會先遭殃，例如大腦、心肌、骨骼肌等
+
+##### heteroplasmy and threshold effect
+- heteroplasmy 就是突變的粒線體跟正常的粒線體共存的現象
+- 通常，只有當突變的mtDNA比例超過一定的threshold，才會有症狀
+
+##### nuclear DNA & mitochondrial function
+- 很多粒線體裡面需要的蛋白質，其實都在細胞核的DNA裡面 (內共生事件發生後被嵌入進去的)
+- 這個時候，這些類似粒線體疾病的症狀，就能夠符合標準的孟德爾模式，變成體染色體或是性染色體的遺傳，而不是母系遺傳
+
+#### other animals examples
+##### chicken: Z-W inheritance
+- 公雞的性染色體是 $ZZ$ ，母雞的是 $ZW$ ，卵子決定後代性別
+- 雞的 "條紋羽毛雞因" (讓白毛雞變成條紋雞)，位於Z染色體
+##### examples of Z-W organisms
+- 除了雞之外，還包含:
+  - 鳥類 (大多數)
+  - 爬蟲 (部分的蛇or蜥蜴)
+  - 兩棲 (部分青蛙)
+  - 昆蟲 (鱗翅目)
+  - 部分魚類
