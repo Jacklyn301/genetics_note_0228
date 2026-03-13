@@ -74,12 +74,15 @@ style R fill: #ff5ecd, stroke: #8d0061, stroke-width: 2px
 
 - 共有四個Bases: **Adenine, Guanine, Thymine, Cytosine**
 - 一個核甘酸包含含氮鹼基 (ATCG)，去氧核糖 (二號碳上面接的是H)，磷酸基
+
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/nucleotide_structure_0301.png)
 
 #### 遺傳物質的破壞
 
 - **RNA對鹼性環境敏感**， $-OH$ group會攻擊ribose上的2'-OH，使其跟磷酸基產生連結，進而破壞磷酸基跟核糖之間的連接，導致RNA斷裂
+
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/RNA_Hydrolysis.png)
+
 - **DNA對酸性環境比較敏感**， $H^{+}$ 會攻擊purine的N，導致purine從DNA上面脫離，脫離後的空位在酸性環境下會促進磷酸二酯鍵的斷裂
 
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/DNA_hydrolysis_0301.png)
@@ -875,7 +878,8 @@ classDef Me fill: #ffa34f, stroke: #c43838, stroke-width: 3px
 - 基本上，男性患者的兒子都沒什麼問題 (因為只會傳遞Y染色體，有問題的基因不會傳下去)，女兒則是carriers (因為為隱性遺傳疾病)，直到他的女兒生的子女，就會發現兒子一半正常，一半發病
 
 
->[!Note] 八卦一下
+>[!Note]
+> 八卦一下
 > 維多利亞女王為hemophilia A (F8基因，位於Xq28) 的carrier，她生了9個孩子，這些孩子之後都變成了其他歐洲國家的王子公主，後代遍布，也非常 "幸運" 的把hemophilia A的基因傳遍各地。Nicholas II兒子的血友病就是這樣得到的 🤣
 
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/Hemophilia_A_0309.png)
@@ -924,3 +928,293 @@ classDef Me fill: #ffa34f, stroke: #c43838, stroke-width: 3px
   - 兩棲 (部分青蛙)
   - 昆蟲 (鱗翅目)
   - 部分魚類
+
+---
+
+## chapter 5
+### indepedent assortment
+- 形成配子時，一對基因的分離，對另一個雞因沒有影響
+- 非對偶基因任意組合至同一個配子中
+
+### 違反孟德爾遺傳的基因定率
+#### genetic linkage
+- 基因連鎖: 兩個基因基本上在同一個染色體上，且距離非常近
+- 一條染色體上所有的基因組成一個連鎖群，並且不符合獨立分配率
+- 理論上，連鎖基因是憶起行動且不可以獨立分配的，但實際上可能發生基因重組 (gene recombination)
+
+#### gene recombment
+- 在prophase I，同源染色體之間會發生片段交換
+- 如果兩個基因的距離很遠 (在同一條染色體的情況下)，發生重組的機率較高，使它們他表現就像是獨立分配
+
+#### Morgam and recombination
+- 提出基因連鎖，交叉、互換等等的概念，讓他得到1933諾貝爾獎
+- 交叉在prophase 1發生，同源染色體在一起產生聯會 (synapses)，形成交叉點處被稱為chiasmata
+
+### 概念深入
+#### parental vs recombinant types
+- 親代型代表沒有發生互換的樣態。重組型代表有發生互換的樣態，通常，產生revombinant types 的機率比出出現parental type的還要少
+- 互換率: 發生互換的配子數，跟所有配子數的比例
+
+$$recombinition\ frequency=\frac{number\ of\ recombinant\ gamates}{total\ gamate}$$
+
+- 基因的互換率，跟兩個基因的物理距離成正比
+- 兩基因在染色體上的距離愈遠，中間發生互換的機率就愈大
+
+假如說我有以下舉例:
+
+```mermaid
+flowchart TB
+wt{灰生長翅<br>BV × bv}
+
+wt-.->g1((BV))
+wt-.->g2((bv))
+wt-.->g3((Bv))
+wt-.->g4((bv))
+
+ be{黑身短翅<br>bv × bv}
+ be-.->g5((bv))
+ g5-->子代
+ subgraph 子代
+  g1-->f1(BV × bv<br>灰身長翅<br>371)
+  g2-->f2(bv × bv<br>黑身短翅<br>359)
+  g3-->f3(Bv × bv<br>灰身短翅<br>136)
+  g4-->f4(bV × bv<br>黑生長翅<br>137)
+ end
+ 
+ total[total: 1000 隻]
+
+%%色彩調整
+
+style 子代 fill: #a6daff, stroke: #000, stroke-width: 2px
+
+style wt fill: #fa98d4, stroke:  #da0c69, stroke-width: 3px
+
+style g1 fill: #fff0a3, stroke: #adadad, stroke-dasharray: 3 3
+style g2 fill: #fff0a3, stroke: #adadad, stroke-dasharray: 3 3
+style g3 fill: #fff0a3, stroke: #adadad, stroke-dasharray: 3 3
+style g4 fill: #fff0a3, stroke: #adadad, stroke-dasharray: 3 3
+
+style be fill: #bdf674, stroke: #4c9836, stroke-widte: 3px
+
+style g5 fill:  #fff0a3, stroke: #adadad, stroke-dasharray: 3 3
+style total fill: #c1bfbf, stroke: #727272, stroke-dasharray: 3 3
+
+```
+$$\text{互換率}=\frac{133+137}{371+359+133+137}=0.27$$
+
+- 如果每一個配子母細胞在減數分裂時基因間都發失了互換 (例如一條染色體為AB，另一條染色體為XY)，那麼AB的比例會各佔有25%，互換率為50%
+> [!Note] 
+> 互換率最高就是50% 🐱
+
+#### recombnation frequency (r)
+- 意旨兩個基因會互換的機率
+- r通常在0跟0.5之間徘迴
+   - 如果r=0，兩個基因基本上完全連鎖，這兩個loci基本上很近，不會有家互換的機會發生，總是做為一個整體來傳承給他人
+   - 如果r=0.5，這兩個基因並不連鎖，或是他們根本不是同一個染色體上面。如果兩個基因在同一個染色體但是距離很遠，它們的互換程度會高到像是獨立分配一樣。再記得一次:
+
+$$r\le 0.5\quad\Rightarrow \text{loci are linked at r}$$
+
+#### 舉個栗子 🌰
+> 假設有兩個果蠅，一隻長翅灰身 ( $S^+S\ B^+b$ )，一隻短翅黑身 ( $ss\ bb$ )，理論如果是獨立分配率，我們應得到的結果如下:
+> |gametes|$s^+b^+$|$s^+b$|$sb^+$|$sb$|
+> |-------|--------|------|------|----|
+> |$sb$|$s^+s\ b^+b$|$s^+s\ bb$|$ss\ b^+b$|$ss\ bb$|
+> 
+> 但實際結果是:
+> - $s^+b^+$ :124
+> - $ss\ b^+b$ : 23
+> - $s^+s\ bb$ : 26
+> - $ss\ bb$ : 124
+
+- $ss\ b^+b$ 跟 $s^+s\ bb$ 的組合少，所以，其並非獨立分配率，但也沒有平均分開。因次推測這兩個組合為互換過後的組合，互換率為:
+
+$$\text{互換率}=\frac{23+26}{127+23+26+124}=0.16\bar{3}$$
+
+#### cis and trans
+- 基因連鎖分為順式跟反式
+- 要是兩個突變型 (隱性) 在同一條染色體上，野生型 (顯性) 在另一條染色體上面，那麼這就屬於順式 (cis)
+- 要是兩個突變型在不同染色體，就被稱為trans
+- 假如說野生型基因為 $Wm$ ，突變型基因為 $+$ ，那麼Cis就是:
+
+$$
+\begin{align}
+\begin{pmatrix}  
+  W & m \\  
+  \text{+} & \text{+}  
+\end{pmatrix} 
+&& \Rightarrow\quad \text{cis configuation}
+\end{align}
+$$
+
+- 要是trans，就是
+
+$$\begin{align}
+  \begin{pmatrix}  
+  W & \text{+} \\  
+  \text{+} & m  
+\end{pmatrix} 
+&& \Rightarrow\quad \text{trans configuation}
+\end{align}$$
+
+#### synteny vs linkage
+- 共線基因 = 在同一個染色體上的基因
+- 連鎖基因 = 共線基因位置足夠靠近，以至於它們傾向於一起遺傳，互換率明顯低於50%
+> [!Note]
+> 要是兩個基因的 $r=0.5\rightarrow$ 基因物理上共線，但是不連鎖
+
+#### locus and genetic mapping
+- locus (loci) = 基因在染色體上面的住址。相對應的基因座會攜帶相同或是不同的alleles
+- genetic map用來表示基因在染色體上相對位置的 "地圖"，它不是顯微鏡下直接看到的物理圖像，而是根據基因連鎖與重組率推算出來的。
+- 以前會用分摩根 (cM) 或是mu這種東西來定義
+> [!Note]
+> 1mu = 1cM = 1% 互換機率
+
+- 現在基本不用cM，基因之間的距離直接用鹼基對來描述
+
+|特徵|遺傳圖譜 (genetic map)|物理圖譜 (physical map)|
+|--|-----------------------|--------------------|
+|測量單位|分摩根，cM|鹼基對，bp|
+|判定依據|重組的頻率，recombination|DNA序列長度|
+|特點|相對位置，受重組熱點影響|絕對位置，不隨互換率改變|
+
+> [!Caution]
+> 1. 兩個基因的互換率如果為10%，那這兩個基因的距離為10 mp，或是10 cM
+> 2. 如果距離單位大於50，那是不可能的，這代表這兩個基因並不連鎖
+
+##### 備註: 甚麼樣的情況下，基因互換會被低估?
+- cross over處根本沒有在兩個基因之間
+- 在兩個基因之間出現兩次的cross over
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/recombinant_rate_0313.png)
+
+- 舉以下的栗子 🌰
+  - 果蠅的染色體為 $XY$ 或是 $XX$
+  - 假如說我在 $XX$ 果蠅的染色體上面動手腳，變成 $X^Y\ X^B$
+  - $X^B$ 代表末端片段缺失，並標記了 "棒眼" 的基因
+  - $X^Y$ 代表接了一小段Y染色體片段，並標記了 "康乃馨色眼" 的基因
+  - 猜猜看子代發生甚麼變化? 
+  - 子代中出現了 $XX$ 、 $XY$ 、 $X^{YB}\ X$ 、 $X^{YB}\ Y$ 的組合
+  - 也就是說， $X^Y\ X^B$ 的B缺失區域可以互換 !
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/Drosophilia_crossover_0313.png)
+
+#### attached-X
+- 一般的果蠅為XX性染色體，不過偶爾兩個X染色體會在著絲點處黏在一起，被稱為attached-X ( $\bar{XX}$ )
+- attached-X母果蠅除了擁有一對融合的X染色體，通常還XX帶有一條Y染色體，遺傳上會呈現2n+1的狀態，但生理表現為雌性
+- 基因上面就會類似:
+
+||$\bar{XX}$|$Y$|
+|-|---|---|
+|$X$|$\bar{XX}\ X$|$YX$|
+|$Y$|$\bar{XX}\ Y$|$YY$|
+
+- 此時， $\bar{XX}\ Y$ 為雌性，繼承了母親的attached-X染色體和父親的Y染色體，而 $XY$ 為雄性，繼承了父親的X染色體跟母親的Y染色體
+- 這種情況跟一般果蠅相反: 兒子的X來自於父親，Y來自於母親
+
+>[!Important]
+> 剛剛的例子裡面有 $\bar{XX}\ X$ 跟 $YY$ 的可能組合，但是通常這兩種基因組合的胚胎都會死掉 🙂
+
+#### 到底如何從attached-X知道染色體的間差是在什麼時發生?
+- 首先我們知道，attached-X是不會有所謂的二次減數分裂的，因為它們同源染色體本來就是兩兩不分離的存在
+- 因此，問題就是，到底交叉是在prophase I之前發生，還是prophase 2之前發生?
+> 讓我們來思想實驗一下... 🐱
+
+```mermaid
+flowchart LR
+AA{前情提要:<br>設attached-X上<br>有一個基因座是Ww}
+
+
+AA==>H1((假設1<br>複製前就交叉))
+AA==>H2((假設2<br>複製後才交叉))
+
+H1-->A(染色體互換前只有一條DNA)
+A-->B(一旦互換完成，再進行複製，所有姐妹染色單體都會帶有同樣的互換結果)
+B-->C(在attached-X系統中，所有染色體都會呈現一致的互換型態)
+C-->D(所有染色單體都會帶有同樣的互換結果，也就是都是Ww)
+
+H2-->a(染色體已經複製成姐妹染色單體，形成四分體)
+a-->b(交叉互換只會在四分體中的部分染色單體之間進行)
+b-->c(有些染色單體帶有互換片段，有些保持原樣)
+c-->d(其中兩條染色單體互換，另外兩條保持原樣，就可能在卵子中出現 ww 這種同型合子組合)
+
+style AA fill: #ff75f5, stroke: #b313a7, stroke-width: 2px
+
+style A fill: #ffef9a, stroke: #000
+style B fill: #ffef9a, stroke: #000
+style C fill: #ffef9a, stroke: #000
+style a fill: #b0ff72, stroke: #000
+style b fill: #b0ff72, stroke: #000
+style c fill: #b0ff72, stroke: #000
+
+style H1 fill: #95efff, stroke: #000
+style H2 fill: #eea57c, stroke: #000
+
+style D fill: #c1c1c1, stroke: #787878, stroke-dasharray: 3 3
+style d fill: #c1c1c1, stroke: #787878, stroke-dasharray: 3 3
+```
+
+- 由於最後在實驗中發現了ww (homozygous recessive allele)，因此確定**cross over是在染色體複製之後發生的**
+
+#### two‑point testcross 
+- 兩點試交是一種遺傳分析方法，用來測量兩個基因座之間的重組率，進而推算它們在染色體上的相對距離
+- 做法基本上就是將一個雙雜合子 (heterozygote) 與一個雙隱性同型合子 (tester, recessive homozygote) 交配，觀察後代的表型比例
+##### 舉個例子 🌰
+- 如果雙雜合子基因型為AaBb，試交者基因型為aabb，如果兩個基因是獨立分配 → 後代會呈現 $AaBb:aaBb:Aabb:aabb = 1:1:1:1$ 的四種組合。
+- 如果兩個基因有連鎖 → 後代的比例會偏向親代型 (parental types) 多於重組型 (recombinant types)
+- 透過計算重組型的比例，就能估算基因間的距離
+
+##### 兩點試交的限制
+- 如果兩個基因時在距離太遠，幾乎都會發生互換 (互換率接近50%)，且可能多次互換，會使重組型看起來跟親代型差不多，導致測量不準確
+- 這時可能就需要三對基因之間的試交來達成 (three-point testcross)
+
+#### cross over 不只一次時
+- 互換有分成好幾種，如下:
+
+|類型|a single crossover|2 strand<br> double exchange|3 strand<br> double exchange|4 strand<br> double exchange|
+|---|---|---|---|---|
+|說明|四分體的<br>其中兩個染色分體，發生一次交叉|四分體的<br>其中兩個染色分體，發生兩次交叉|四分體中的<br>三條染色分體，互相交叉，產生兩條重組型|涉及四條染色分體<br>全部交叉，產生四條重組型|
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/chromosome_crossover_type_0314.png)
+
+- 好，我們用以上這張圖來說明這種狀況:
+  - 一種是雙重互換，但重組後四條染色體跟親代一樣 (機率25%)
+  - 一種是雙重互換，在四條染色體中做出了兩條重組基因 (機率50%)
+  - 一種是四條都發生互換，四條染色體基因都重組 (機率25%)
+- 咱們來計算一下:
+
+$$(\frac{1}{4}\cdot 0)+(\frac{1}{2}\cdot 2)+(\frac{1}{4}\cdot 4)=2$$
+
+- 又因為:
+
+$$\text{重組頻率}=2\div 4=0.5 (\text{已經是最大值})$$
+
+>[!Important]
+>在多次互換的情況下，其遺傳表現就跟獨立分配率幾乎無異了 ! 😮
+
+##### 染色分體干擾
+- 如果第一次互換影響到了第二次互換選擇染色分體的對象，這就叫做**染色分體干擾**，也就出現所謂的 "非隨機性"
+- 這會導致實際測得的重組率並非理想中的50%
+
+#### three‑point testcross 
+- Morgan為了更有效的對基因對跟定序，他跟學生發明了三點試交，涉及到三個連鎖的基因
+- 三點測交中，研究者同時追蹤三個基因座，例如，可以同時得到三組距離：A–B、B–C、A–C
+- 透過分析雙互換的後代型態，可以判斷基因的正確排列順序。
+>[!Note] 
+>例如: 如果 A–C 的距離 ≈ A–B + B–C，就能確定 B 在 A 和 C 之間。
+
+##### 舉個栗子 🌰
+> 假如說我有三種基因: $rb$ 、 $y$ 、 $cv$ ，發現它們的基因距離分別為 $y-rb=7.5\ cM$ 、 $rb-cv=6.2\ cM$ 請問它們的相對頻率是多少?
+<details>
+    <summary>點我看解答 👀</summary>
+    
+1. 由於 $y-rb=7.5\ cM$ ，為長距離，我們可以推測 $cv$ 基因可能在 $y$ 跟 $rb$ 之間。也就是: 
+
+$$y\cdots 1.3\ cM\cdots cv\cdots 6.2\ cM\cdots rb\quad \text{整體長度7.5cM}$$
+
+2. 當然，也有可能這兩段距離屬於串聯關係，這時 $rb$ 就會在 $y-cv$ 中間，也就是:
+    
+$$y\cdots 7.5\ cM\cdots rb\cdots 6.2\ cM\cdots cv\quad \text{整體長度13.7cM}$$
+    
+**因此答案有兩個可能解** 🐱
+    
+</details>
