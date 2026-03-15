@@ -1343,3 +1343,234 @@ $$\text{coefficient of coincidence}=\frac{reality\ DCO}{ideal\ DCO}$$
 |Positive interference|0~1之間|0~1之間|正干涉，即第一次交換後，引起鄰近第二次交換的機會的**下降**|在生物界普遍存在|
 |Negative interference|大於1|負數|某處發生crossover，會增加另一處crossover的發生|有時僅在微生物中出現|
 |Complete interference|0|1|表示存在完全干涉，區域內絕對不會發生雙互換。||
+
+#### 重組頻率跟遺傳距離的關係
+- 可以化成一個函數圖形 (genetic map function)
+- 遺傳距離為x，重組頻率為r
+- 假如說是一般完全干擾的，那麼重組率基本上完全等於遺傳距離 (也就是，基因的互換最多只能發生一次)
+- 當干擾係數增加，產生多次互換的機率變高，重組率不一定等於遺傳距離
+- 因此在圖形上，完全干涉 ( $i=1$ ) 的圖形是一條45度的直線，無干涉的圖形 ( $i=0$ ) 會產生一條無限接近 $r=0.5$ 的漸近線
+- 多數生物的實際圖形床是位於兩者之間 ( $0<i<1$ )
+- 圖形上，無論i等於多少，在短距離內 (通常是 $<15\ cM$ )，發生雙互換的機率極低，所以 $r\approx x$ 
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/genetic_mapping_0315.png)
+
+### 當我開始想要找到你
+#### physical and genetic map
+- physical map通常就是對應到DNA的實際長度 (bp)
+- 雖然物理上， "相隔越遠，互換率越高"，但是其實不是這樣的
+- 在euchromatin上，重組活躍，遺傳距離跟物理距離較為一致
+- 而在heterochromatin上，基因密度低，該區域發生重組的機率極低
+- 例如以下這張圖，可以發現有些地方屬於重組多的區域，有些重組較稀少，就會有 "長度跟分摩根不一致" 的狀態出現
+
+> [!Note]
+> 例如，異染色質可能在物理距離上面占了25%的容量，但是互換率卻只有2.8% 🐱
+
+![image alt](https://www.genome.gov/sites/default/files/inline-images/Genetic-mapping_Fact-sheet2020.jpg)
+
+#### genetic marker
+- 這個時候就會用到基因標記，通常指標用的是SNP
+- SNP有時會跟某個基因距離很近，導致高連鎖率，也就是所謂的 "共同隔離" (co-segregation) 概念
+- 我們會用統計方法計算致病基因在哪些SNPs之間，就可以知道其在染色體上的位置
+
+#### family-based linkage analysis methods and LOD
+- 通常有三個特徵:
+  - 需要多代的資料
+  - 對於單基因、高穿透率的疾病最有效
+  - 根據基因位置尋找基因，事先並不知道基因具體的致病機制
+> [!Tip]
+> 連鎖分析的基本概念:
+> 估計互換率並進行統計，擬定出一個特定值: **LOD (log of odds)**
+
+##### 舉個栗子 🌰
+- 假如說我們有一個例子如下:
+
+```mermaid
+flowchart TB
+classDef red fill: #ffaa5c, stroke: #000
+classDef blue fill: #5cfaff, stroke: #000
+classDef gray fill: #d8d8d8, stroke: #7f7f7f, stroke-dasharray: 3 3
+
+subgraph I 
+ A[102/104]
+ B(106/106)
+end
+
+A-->|產下|C
+B-->|產下|C
+
+subgraph II
+C(102/106)
+D[108/108]
+end
+
+subgraph III
+direction TB
+E[106/108]
+F(102/108)
+G(102/108)
+H[106/108]
+I(102/108)
+J(102/108)
+K[106/108]
+L[106, 108]
+end
+
+C-->|產下|III
+D-->|產下|III
+
+subgraph 圖例
+direction TB
+M[male]
+W(female)
+N((健康))
+S((生病))
+end
+
+
+class A,C,F,H,I,J,S red;
+class B,D,E,G,K,L,N blue;
+class 圖例 gray
+```
+- 以上這些數字，都是在個體身上發現的標記物 (例如SSRP)，因此親代中父親102/104就屬於異型合子，母親106/106就屬於同型合子。我們發現:
+- 如果我們懷疑標記102屬於 "顯性的致病基因標記物"，那麼我們在第三大的八個子女中，會發現:
+  - 有三名病患遺傳102，三名健康者身上沒有102
+  - 但是有一名男性沒有遺傳102卻發病，也有一名女性遺傳102卻身體健康
+  - 因此重組率就是:
+
+$$\frac{1+1}{1+1+3+3}=0.25$$
+
+- 接下來，我們要搬出LOD的計算公式:
+
+$$LOD(\theta) = \log_{10}\left(\frac{P(\text{觀察到的資料 | 連鎖假設，重組率 = }\theta)}{P(\text{觀察到的資料 | 無連鎖假設，重組率 = 0.5})}\right)$$
+
+- 接下來我們比較兩個可能性，也就是該宮是的分子跟分母:
+  - 分子: 假設I: 致病基因跟該標記連鎖，但是有r的互換機率
+  - 分母: 假設II: 它們不連鎖，獨立分配 (r=0.5)
+- 然後就來算二項分配 (想哭):
+- 假設I的狀況如下:
+
+$$P\text{{Pedigree | r=0.25}}=\frac{8!}{2!6!} (0.25)^2(0.75)^6=0.311$$
+
+- 假設II的狀況如下:
+
+$$P\text{{Pedigree | r=0.5}}=\frac{8!}{2!6!} (0.5)^2(0.5)^6=0.109$$
+
+- 因此，我們得到的LOD分數就是:
+
+$$LOD(\theta) = \log_{10}(\frac{0.311}{0.109})=\boxed{0.454}$$
+
+- 我們可以發現單一家系算出來的LOD通常很小，因此，我們可以將不同家族針對同一對標記算出的LOD分數直接相加 (畢竟他是對數嘛)
+- 通常當標記跟疾病之間的LOD超過3 (也就是，該標記跟疾病有連鎖的假設比沒有連鎖的假設可能性高**超過1000倍**)，我們就會接受假設I
+
+![image alt](https://www.mun.ca/biology/scarr/LOD_score_plot.gif)
+
+##### 限制
+- linkage analysis這種分析適合單基因遺傳疾病，而且需要龐大的家系提供統計強度
+- 不適合複雜性、或是多基因遺傳疾病的致病基因，也不適合風險基因的偵測
+- "解析度" 的限制: 染色分體之間發生交錯通常需要0.01 cM以上的距離，所以難以直接鎖定單一鹼基找出致病基因的實際位置，只能大致分析出可能的區間位置
+
+#### GWAS (genome-wide association) 救場
+- 透過分析兩群人 (病患跟控制組) 之間的基因多樣性差距 (例如找SNPs)，來從茫茫人海中找到可能的標記
+
+##### 舉糖尿病的例子為例
+- 透過GWAS，我們發現一型糖尿病患者帶有標記**HLA DR4**的機率高於正常者。我們分成發病組跟正常組來看:
+
+|基因型|一型糖尿病患者組|控制組|總計|
+|-----|-------------|-----|---|
+|帶有HLA DR4|17|7|24|
+|沒帶有HLA DR4|20|30|25|
+|樣本組人數總計|37|37|74|
+
+> [!Warning]
+> 統計地獄來了大家準備好啊啊啊啊啊 😭
+
+- 先來做假設:
+
+$$
+\begin{align}
+& H_0\rightarrow \text{基因型與是否患有一型糖尿病沒有關聯}\\
+& H_a\rightarrow \text{基因型與是否患有一型糖尿病有關聯}
+\end{align}
+$$
+
+- 然後計算期望值:
+
+$$E_{ij} = \dfrac{(\text{row total})(\text{column total})}{\text{grand total}}$$
+
+- $E_{11} = \dfrac{24 \cdot 37}{74} = 12$ 
+- $E_{12} = \dfrac{24 \cdot 37}{74} = 12$
+- $E_{21} = \dfrac{50 \cdot 37}{74} = 25$
+- $E_{22} = \dfrac{50 \cdot 37}{74} = 25$
+
+- 然後搬出卡方統計量公式:
+
+$$\chi^2 = \sum \dfrac{(O - E)^2}{E}$$
+
+- 然後開始地獄計算...
+
+$$
+\begin{align}
+\chi^2 & = \frac{(17-12)^2}{12} + \frac{(7-12)^2}{12} + \frac{(20-25)^2}{25} + \frac{(30-25)^2}{25}\\
+& = 2.083 + 2.083 + 1 + 1 = \boxed{6.166}
+\end{align}
+$$
+
+- 判斷顯著性: 在 $df=(2-1)(2-1)=1,\ \alpha=0.05$ 時， $\chi^2_{0.05,1} = 3.84$ 
+> 由於 $6.166 > 3.84$ ，因此拒絕虛無假說，**帶有HLA DR4與一型糖尿病之間存在顯著關聯** 🐱
+
+#### linkage disequilibrium, LD
+- 在很久以前，致病的突變發生在特定的染色體上面，該染色體本來就有攜帶特定的SNP
+- 代代相傳之後，儘管重組了很多遍，這個致病基因依然跟這個SNP連鎖在一起，因為這個基因跟SNP實在是靠太近了，互換率幾乎為0 (嗚嗚嗚好感動 🥹)
+- 這又被稱為**連鎖不平衡，LD**
+- 由於GWAS直接掃描整個基因組，不預設目標，對於多個基因共同影響的複雜疾病來說，GWAS就是最有效的工具
+
+#### HapMap 計畫
+- 2002年開始進行的大規模SNP圖譜構建
+- 目標包含找出複雜疾病相關的DNA區域，以及了解遺傳變異如何影響個體對環境的反應差異
+
+> [!Note]
+> 第二期計畫就挖出了1000萬個SNPs，效率超快 !! 😮
+
+##### 建立Haplotype跟tag SNPs
+- 一條染色體上不是有很多SNPs嗎? 把這些SNPs連續串在一起，就是一條染色體的**Haplotype**。所以就會有Haplotype 1、Haplotype 2、Haplotype 3...
+- 其中，有些SNP可以幫忙識別該haplotype (就像個名牌一樣)，這些SNPs又被稱為**tag SNPs**
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/haplotype_and_tag_SNPs_0315.png)
+
+##### 曼哈頓圖 Manhatten plot
+- GWAS的研究成果通常都是這樣呈現的，包含X軸: 表示SNP在染色體上的物理位置，以及Y軸: 表示該SNP跟疾病關聯的p-value的負對數值 ( $-\log_{10}(P)$ )
+- Y軸數值越高，代表P值越小，該位點跟疾病的關聯性就越顯著
+- 通常圖上還有一個顯著性門檻，點越過此線就代表他可能為候選的致病位點
+
+> [!Note]
+> 拿最簡單的[Nature雜誌發表對於阿茲海默症的研究](https://www.nature.com/articles/s41598-021-99352-3.pdf)，APOE位點一直都是跟高AD發病率相關。大家有興趣可以點擊連結看看喔~ 👀
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/GWAS_and_AD_0315.png)
+
+- 其他相關的GWAS研究包含但不限於: 
+
+|疾病名稱|區域位點or相關的染色體|
+|------|-------|
+|type I diabetes|HLA region, chr6|
+|coronary artery disease|chr9|
+|rheumatoid arthritis|chr6|
+|Chohn's disease|chr5, chr16, NOD2|
+
+##### GWAS的限制
+- 需要很多樣本，統計的power基本就取決於你的樣本有多少
+- 使用SNP chips容易產生type I error
+- 你的樣本選擇可能並不完全符合母體的比例
+- GWAS只呈現相關性，但是**相關不等於因果 !!**
+- 罕見的SNP難以用chips偵測
+
+##### spectrum of disease allele effect
+- 在遺傳學中，我們會用變異在人群中的普及程度，以及其對疾病的貢獻程度，來進行分類。通常分成三種:
+
+|種類|圖表位於|特性|舉例|例子的相關位點|
+|---|-------|---|----|-----------|
+|rare disease, rare variant|左上角|極為罕見 (<0.001)，高穿透率，效應值極大|Huntington’s disease|HTT基因|
+|common disease, common variant|右下角|非常普遍 (>0.05)，但是單一變異貢獻極小，效應值大概在1.1~1.5之間|prostate cancer|LMTK2位點|
+|less common variant|圖表中央|中等程度效應值，頻率在0.005~0.05之間|Crohn's disease|NOD2|
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/Spectrum-of-Disease-Allele-Effects-Disease-associations-are-often-conceptualized-in-two_0315.webp)
