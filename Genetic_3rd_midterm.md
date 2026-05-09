@@ -592,3 +592,260 @@ flowchart LR
     J --> K{Lytic<br>cycle}
 ```
 ![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/bacteriophage_lambda_life_cycle_and_gene_transcription_0508.png)
+
+### 真核生物的調控方法
+- 有些基因是屬於管家基因 (housekeeping gene) 在細胞裡持續表達、維持基本生命活動。而其他的可能受到細胞週期調控
+- 相對於細菌來說，真核生物的表達跟未表達基因的差距較小。前者的表現量可以差到幾百倍，後者最多只有十倍
+
+#### 酵母的半乳糖代謝途徑
+##### GAL1
+- 編碼 galactokinase，把 D-galactose變成galactose-1-phosphate，需要 ATP
+
+##### GAL7
+- 編碼 galactose-1-phosphate uridylyltransferase，將GA1P跟UDP-glucose結合形成UDP-galactose + G1P (UDP換位置)
+
+##### GAL10
+- 編碼 UDP-galactose 4-epimerase，把 UDP-galactose變成UDP-glucose，這樣 UDP-glucose 可以再循環回 GAL7 反應，形成一個代謝迴路
+```mermaid
+flowchart LR
+    A([D-galactose]) -->|Galactokinase<br> + ATP| B([Galactose-1<br>phosphate])
+    B -->|Galactose-1-P<br>uridylyltransferase| C([Glucose-1<br>phosphate])
+    B -->|+UDP-glucose| D([UDP-galactose])
+    D -->|UDP-galactose<br>4-epimerase| E([UDP-glucose])
+    E -->|循環回到 GAL7|B
+    C -->|進入| F{Glycolysis}
+```
+- 不同突變會導致基因的表現樣出現以下狀況: 
+
+##### gal4突變
+- GAL4 是轉錄活化因子，負責打開GAL1/7/10的表達
+- gal4 突變會使GAL4功能喪失，無法活化基因
+##### gal80突變
+- GAL80表達repressor，會結合 GAL4，阻止它活化 GAL 基因。只有在有半乳糖時，GAL80 被解除，GAL4 才能活化
+- gal80突變會導致其蛋白質失效，GAL4不再被抑制
+
+##### $GAL81^c$ 突變
+- 是 GAL4 的一種超活化突變，它能持續活化 GAL 基因，即使沒有半乳糖 (constitutive)
+
+#### 真核生物的轉錄複合體
+- 真核生物利用增強子 (enhancer) 加強轉錄時，透過的是DNA的環化 (DNA looping)，而調控的重點就是轉錄複合體 (transcription complex)
+
+##### complex 組成
+- 一般轉錄因子 (GTFs)
+  - **TFIID**: 含 TBP (TATA-binding protein) + TAFs，負責辨識 TATA box
+  - **TFIIB**: 幫助 RNA Pol II 定位在正確的起始點
+  - **TFIIF**: 穩定 RNA Pol II 與 DNA 的結合
+  - **TFIIE**: 招募 TFIIH
+  - **TFIIH**: 有 helicase 活性，打開 DNA 雙股；還有 kinase 活性，磷酸化 Pol II 的 CTD，啟動轉錄
+- RNA polymerase II
+- activator 與 enhancer
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/transcription_complex_during_Drosophila_development_0508.png)
+
+##### 步驟簡介
+- 在一段轉錄單位中，TFIID會先辨識promoter上的TATA box
+  - 它是第一個接觸 promoter 的因子，負責定位
+- activator會先跟enhancer結合，然後DNA折疊成迴圈，讓 enhancer 上的活化蛋白能接觸到 TFIID，同時招募 RNA polymerase II holoenzyme
+- TFIID + Pol II + 其他一般轉錄因子，組裝完成起始複合體
+
+> [!Note]
+> enhancer 可以在 promoter 很遠的地方，但仍能影響轉錄 🐱 
+
+- 在*Drosophila*的早期胚胎發育裡，Bicoid (BCD)和 Hunchback (HB) 就是典型的activators。Bicoid (BCD) 屬於母體效應基因，決定胚胎前端的頭部結構
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/transcriptional_activation_by_recruitment_0509.png)
+
+- 再剛剛提到的酵母的 GAL 系統裡，GAL4 就是典型的 activator，結合 UAS (upstream activating sequence，相當於 enhancer 的角色)，以及招募TFIID、RNA Pol II等
+- GAL80身為repressor，它本身不直接結合DNA，而是結合到 GAL4 的活化區域，阻止GAL4與轉錄複合體互動
+- 當細胞裡有galactose時，另一個蛋白 GAL3 會感知和結合半乳糖，並把 GAL80 從 GAL4 上拉走。這樣 GAL4 才能自由招募轉錄複合體 
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/regulation_of_GAL_genes_by_GAL3p_GAL80p_and_GAL4_0509.png)
+
+#### Zinc finger
+- 鋅指結構是一種常見的 DNA 結合結構域，通常由一個 $Zn^{2+}$ ，以及4個cysteine殘基 (or 2 cysteine + 2 histidine) 結合組成，該配位讓蛋白質摺疊成一個指狀結構
+- 這個「指」能插入 DNA 的major groove，特異性辨識特定序列
+- 很多的transcription regulator proteins會有一個或是多個鋅指結構
+
+![image alt](https://www.med.nagasaki-u.ac.jp/phrmch1/lcn/files/C2H2zincfinger.jpg)
+
+#### enhancer: a closer look
+##### 位置
+- 最早發現的enhancer在promoter上游，但其實它可以位於下游、內含子，甚至離基因很遠，不管enhancer的方向如何，它都能發揮作用
+- 如果是透過DNA loop，enhancer可以跨越數千bp甚至更遠來影響promoter
+
+##### 對不同分子有反應
+- 最常見的當然是蛋白質activator (如剛剛提到的Bicoid、Hunchback、GAL4)，而有些是會結合 "核受體蛋白"，這些蛋白只會在結合激素後，才能活化enhancer，所以這些enhancer又被稱為hormone response elements
+
+![image alt](https://www.reagent.co.uk/wp-content/uploads/ster/id/steroid-hormone-response.jpg)
+
+#### silencer
+- 和 enhancer 一樣，不一定只在基因上游，也可以在下游或內含子中
+- 當 repressor 蛋白結合到 silencer 上時，會招募抑制性複合體 (如histone deacetylase)，讓染色質緊縮，降低基因表達
+- 舉Polycomb group (PcG) 蛋白為例。PcG會結合到特定silencer區域，並透過修飾組蛋白來抑制基因表達
+  - PRC2複合體在H3上加上H3K27me3 (三甲基化)，標記該區域為「沉默」
+  - PRC1複合體透過辨識 H3K27me3，進一步壓縮染色質，阻止RNA pol II進入
+
+#### reporter-gene constructs 
+- 研究人員會把想測試的DNA序列 (如 enhancer 或 silencer)，接到一個 "容易偵測的基因" 前面，觀察它是否能影響基因表達
+- 該reporter gene通常選用一個表達後容易量測的基因，例如lacZ，其產生的 $\beta$ -galactosidase 可以用顏色反應顯示
+- 把 "測試序列 + reporter gene" 拼接成一個人工DNA，然後導入細胞或生物體
+  - 如果把某段 DNA 接到 reporter gene 前面，結果 reporter 表達量增加 → 那段 DNA 就是 enhancer
+  - 如果 reporter gene 本來會表達，但加上某段 DNA 後表達下降 → 那段 DNA 就是 silencer
+- 透過可以逐步刪減或突變 DNA 序列，觀察 reporter 表達的變化，精準找出 enhancer/silencer 的核心序列
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/reporter-gene_constructs_of_GAL1_lacZ_fusion_0508.png)
+
+##### novel regulatory motifs
+- 指的是在 DNA 上新發現的、以前沒有被認識過的調控序列模式
+- 它們通常是短的核苷酸序列，能夠被特定的蛋白質或其他分子辨識
+- 首先，regulatory motifs本身就是一段短而有功能的 DNA 序列 (如TATA box屬於promoter motifs)
+- 而novel regulatory motifs通常是新發現的，可能在特定物種或特定基因群中才有，作用於
+- 減數分裂、細胞週期、DNA損傷跟修復等等
+
+|酵母菌的 Regulatory motif|在甚麼地方扮演角色|
+|---|---|
+|AATGTA| DNA損傷跟修復|
+|ACATAC| DNA損傷跟修復、應激壓力|
+|TTTTCAT |應激壓力|
+|TAGAAA| 細胞週期|
+|TTCTTTC|  細胞週期|
+|ACAAAA|減數分裂|
+|CCCTTTT |減數分裂|
+
+#### RNA pol II
+- RNA 聚合酶 II 的磷酸化和轉錄的進行有非常密切的關係，主要涉及它的 CTD (C-terminal domain)
+- CTD上有許多heptapeptide 序列，其中的絲氨酸殘基會被不同kinase磷酸化，影響其轉錄狀態
+- Ser5 磷酸化可以幫助 RNA Pol II 從 promoter 釋放，開始合成 RNA
+
+#### chromatin remodeling complexes (CRCs)
+- 染色質重組複合體 (像果蠅的 RSC、NURF、CHRAC 和酵母的 SWI/SNF) 是細胞用來 "打開或重塑染色質結構" 的工具
+
+##### SWI/SNF
+- 是最早被發現的染色質重組複合體，利用 ATP 水解能量，把核小體 (nucleosome) 移動或鬆開，讓 DNA 區域暴露出來
+
+##### RSC
+- aka "Remodels the Structure of Chromatin"
+- 和 SWI/SNF 類似，也是 ATP-dependent，在果蠅胚胎發育中，負責大範圍的染色質結構調整
+
+##### NURF 
+- aka "Nucleosome Remodeling Factor"
+- 擅長滑動核小體，讓 DNA 上的調控序列暴露，常和特定轉錄因子合作，精細調控基因表達
+
+##### CHRAC
+- aka "Chromatin Accessibility Complex"
+- 顧名思義，它能在核小體之間插入 DNA，增加可讀性
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/function_of_chromatin-remodeling_complexes_0509.png)
+
+#### alterative promoter
+- 果蠅的alcohol dehydrogenase (Adh) 基因在幼蟲和成蟲階段使用不同的 promoter，這導致了前mRNA的長度差異 (雖然最終修飾過後的mRNA是一樣的)
+- 相對來說，成蟲的前mRNA有更長的5' 端前導序列
+- 幼蟲和成蟲的代謝需求不同，透過不同 promoter 來調整基因表達，這也讓同一個基因可以在不同環境或生理狀態下被獨立調控
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/alternative_promoters_for_ADH_in_Drosophila_0508.png)
+
+- 甚至，同一個 enhancer 可以被不同的 activator 蛋白結合，結果形成的 DNA loop 會連接到不同的 promoter 或基因，導致不同的轉錄輸出
+- 由於enhancer 本身是一段 DNA 序列，可以有多個 binding site。不同的 activator 在不同的細胞型態或發育階段出現，會選擇性地結合到 enhancer
+
+> [!Tip]
+> 同一 enhancer → 不同 activator → 不同基因被打開 🐱
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/competition_for_an_enhancer_and_genetic_switching_0509.png)
+
+- 人的血紅蛋白基因群 (globin gene cluster) 就是一個經典例子。同一個基因座上有多個血紅蛋白基因，透過 不同的 enhancer 與不同的 activator/調控因子，在胚胎、胎兒、成人階段表達的基因不一樣
+
+| 發育階段 | 主要基因 | 血紅蛋白型態 | 組成 | 氧親和力 |
+| --- | --- | --- | --- | --- |
+| **胚胎期** | $\varepsilon$ -globin  | HbE | $\alpha_2\varepsilon_2$ | 中等 |
+| **胎兒期** | $\gamma$ -globin | HbF | $\alpha_2\gamma_2$ | 最高 (方便胎兒從母體血液獲取氧氣) |
+| **成人期** | $\beta$ -globin | HbA | $\alpha_2\beta_2$ | 正常 (適合成人組織供氧) |
+| 成人少量 | δ-globin | HbA₂ | $\alpha_2\delta_2$ | 與 HbA 類似，比例低 (~2–3%) |
+
+### 表觀遺傳調控
+#### 在這之前得先讓你知道一些詞彙... 🤔
+| 術語 | 定義 | 例子 |
+| --- | --- | --- |
+| **Pronuclear microinjection** | 在受精卵的前核 (pronucleus) 中直接注入外源 DNA，常用於製造轉基因動物 | 小鼠胚胎注入人類基因，產生轉基因小鼠 |
+| **Position effect** | 同一基因插入不同染色體位置，因染色質環境不同，表達量或模式會改變 | 基因插入異染色質 → 表達被沉默；插入常染色質 → 表達正常 |
+| **Penetrance** | 某基因型在群體中實際表現出表型的比例 | 有致病突變但只有 80% 的攜帶者表現症狀 → 穿透率 80% |
+| **Expressivity** | 同一基因型在不同個體中表型表現的強弱或變異程度 | 同樣有致病突變，有人症狀輕微，有人症狀嚴重 → 表現度不同 |
+
+#### 定義
+- 如果某些改變會遺傳，會影響基因表現，但是跟DNA的改變本身沒有關係，而是別的，這被稱為表觀遺傳
+
+#### 胞嘧啶甲基化
+- 在cytosine的五號碳原子上面加上甲基
+
+![image alt](https://files.zymoresearch.com/images/blogs/dna-methylation-101/figure_1.png)
+
+- 許多哺乳動物的基因上游都有一個 "有hen多CG的區域"，這又被稱為CpG islands
+- DNA 複製後，原本的甲基化只會留在舊股，新合成的股是未甲基化的，這形成所謂的 "半甲基化" DNA (hemimethylated DNA)
+- 甲基轉移酶能辨認半甲基化的CpG，把甲基加到新股上，恢復成雙股都甲基化
+- MspI和HpaII都是辨識CCGG序列的限制酶，但它們在 "是否能切割甲基化 DNA" 上有差異，因此常被用來研究 DNA 甲基化狀態
+
+| 特徵 | **MspI** | **HpaII** |
+| --- | --- | --- |
+| 辨識序列 | CCGG | CCGG |
+| 切割能力 | 不受甲基化影響，無論 CpG 是否甲基化都能切割 | 受甲基化影響，如果內側的 **C (CpG)** 被甲基化，就不能切割 |
+| 研究用途 | 作為 "對照酶"，確認序列是否存在 | 作為 "甲基化敏感酶"，用來偵測 CpG 位點是否甲基化 |
+
+- 在人類基因組中，超過 70–80% 的 CpG 位點通常是甲基化的。甲基化跟基因的轉錄減少有關係
+- 玉米的Ac (Activator) transposable element屬於轉座子的一種。它被轉錄後會形成轉座酶，觸發自身的位置移動。通常在值物裡面，甲基化抑制 Ac，防止它隨意插入破壞基因
+- methylation induced premeiotically，指的是在減數分裂發生之前，基因或 DNA 區域會被加上甲基化標記。這些甲基化標記會被帶入減數分裂，進而影響配子的基因表達
+
+> [!Note]
+> MIP的這些甲基化標記可能會影響後代的基因表達，但原因未知 🐱
+
+- azacytidine是一種核苷類似物，在 DNA 複製時會被掺入到 DNA 中，卻無法被正常甲基化，並且會干擾甲基轉移酶的作用 (DNMT在嘗試甲基化對方時會卡住 🙂)
+
+#### genomic imprinting
+- 某些基因的表達取決於它是來自父親還是母親的染色體，配子形成時，特定基因會被甲基化或去甲基化，建立 "親本特異性" 的表觀遺傳標記。例如IGF2因只表達父源拷貝，H19基因只表達母源拷貝
+- 染色體15q11區域就是基因組印記的經典案例。這個區域的有些基因只在父源拷貝活化，有些則只在母源拷貝活化
+   - 如果父源染色體在15q11區域的基因SNRPN、necdin缺失，由於母源拷貝在這個區域通常被甲基化沉默，所以如果父源拷貝缺失，整個區域就沒有活性基因
+   - 如果母源染色體在15q11區域的基因UBE3A缺失，由於父源拷貝在這個區域通常被甲基化沉默，所以如果母源拷貝缺失，整個區域也一樣沒有活性基因
+- 基因組印記的好處可以用親本衝突理論 (parental conflict theory) 來理解: 
+  - 父源基因傾向促進胚胎快速生長，爭取更多母體資源
+  - 母源基因傾向限制胚胎過度消耗，保護母體，確保能有多次繁殖機會
+
+
+> [!Tip]
+> - SNRPN、necdin缺失導致小胖威利症，Prader–Willi syndrome
+> - UBE3A缺失導致安格曼症，Angelman syndrome 🐱
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/imprinting_of_genes_in_chromosomal_region_15q11_0509.png)
+
+### 和RNA processing有關的調控
+#### alternative splicing
+- 在 mRNA 剪接時，某些外顯子會被保留或移除，導致一個基因，多種蛋白質的效果，這又被稱為選擇性剪接
+- 例如，肝臟和肌肉雖然使用同一基因，但最後形成的胰島素受體結構略有不同。肝臟insulin receptor的親和力較低，肌肉insulin receptor的親和力較，兩者就差在... 後者切掉了exon 11
+
+##### sex-specific alternative splicing in Drosophila
+- 主要涉及四個關鍵基因，負責決定個體最後是雄蠅還是雌蠅
+
+| 基因 | 功能角色 | 雌蠅剪接結果 | 雄蠅剪接結果 |
+| --- | --- | --- | --- |
+| **Sex-lethal (Sxl)** | 最上游的性別開關基因，感知 X 染色體數目。 | 產生功能性 Sxl 蛋白 → 啟動雌性路徑 | 剪接產生 premature stop → 無功能蛋白 |
+| **Transformer (tra)** | 中游的 "剪接調控器"。需要 Sxl 蛋白來正確剪接 | 在 Sxl 幫助下 → 產生功能性 Tra 蛋白 | 沒有 Sxl → 剪接失敗 → 無功能蛋白 |
+| **Doublesex (dsx)** | 下游的性別決定因子。Tra 蛋白決定剪接型態 | 剪接成 **female-specific DsxF** → 啟動雌性特徵 | 無Tra剪接 → 啟動雄性特徵 |
+| **Fruitless (fru)** | 行為層面的性別程式。Tra 蛋白也影響它的剪接 | 轉錄提前停止 → 無功能蛋白 | 無提前遇到終止密碼子 → 產生功能性 fruitless |
+
+> [!Note]
+> - 如果fruitless出現mutation，公果蠅可能會突然... 🤔
+>   - 不太會追母果蠅
+>   - 求偶流程卡住
+>   - 有時甚至改追公果蠅 ( ? )
+>   - 或對任何東西亂求偶，包括其他物種、死掉的果蠅屍體、甚至棉花棒 ( ? ? )
+
+#### mRNA的穩定性
+
+| 類型 | 機制 | 特徵 |
+| --- | --- | --- |
+| **Deadenylation-dependent decay** | 起始於移除 mRNA 3' poly-A 尾巴 → 失去保護 → mRNA 容易被降解 | Poly-A tail 相當於 mRNA 的保護蓋 |
+| **Deadenylation-independent decay** | 起始於decapping跟內切酶切割，不需要先去掉 poly-A 尾巴，直接由特定機制降解 | 常見例子: **Nonsense-mediated decay (NMD)**，偵測到 premature stop codon → 直接降解 |
+
+##### 註解: 老師曾說
+- 在核糖體轉譯時，如果一段 mRNA 上連續使用 "常見 codon"，核糖體就能一路順暢地跑 (autocorrelated codons)
+- 相反，如果 codon 排列混雜，交錯變多，轉錄的整體速度下降 (anticorrelated codons)
+- 通常在在 mRNA 的 5′ 端起始區，核糖體通常會比較慢，形成一個 "ramp"，一旦過了 ramp 區域，速度就會加快，翻譯更順暢
+
+![image alt](https://raw.githubusercontent.com/Jacklyn301/image_bank/main/transcription_speed_limit_effected_by_mRNA_sequence_0510.png)
